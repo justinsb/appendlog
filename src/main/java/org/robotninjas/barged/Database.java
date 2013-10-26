@@ -37,7 +37,6 @@ public class Database implements StateMachine {
   @Override
   public void applyOperation(@Nonnull ByteBuffer op) {
     try {
-      System.out.println("commit");
       KvEntry entry = KvEntry.parseFrom(ByteString.copyFrom(op));
       ByteString key = entry.getKey();
       ByteString value = entry.getValue();

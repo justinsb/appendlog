@@ -44,10 +44,8 @@ public class BargeD {
     } catch (InterruptedException e) {
       return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
     } catch (NoLeaderException e) {
-      System.out.println("NO LEADER");
       return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
     } catch (NotLeaderException e) {
-      System.out.println("REDIRECT");
       Replica leader = e.getLeader();
       InetSocketAddress address = (InetSocketAddress) leader.address();
       URI uri = URI.create("http://" + address.getHostName() + ":" + address.getPort() + "/" + key);

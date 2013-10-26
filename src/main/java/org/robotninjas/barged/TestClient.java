@@ -17,7 +17,7 @@ public class TestClient {
     Client client = Client.create();
     client.setFollowRedirects(true);
 
-    RateLimiter limiter = RateLimiter.create(1000);
+    RateLimiter limiter = RateLimiter.create(10000);
     for (long i = 0; i < 100000; i++) {
       limiter.acquire();
       ByteBuffer buffer = ByteBuffer.allocate(8);
