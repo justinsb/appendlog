@@ -1,0 +1,8 @@
+option java_package = "org.robotninjas.barged";
+
+option java_outer_classname = "KvProto";
+
+message KvEntry {
+	required bytes key = 1;
+	required bytes value = 2;
+}
