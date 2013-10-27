@@ -22,7 +22,7 @@ import static org.robotninjas.barged.TestClient.SuccessPredicate.Success;
 
 public class TestClient {
 
-  private static final String BASE_URL = "http://localhost:9992/";
+  private static final String BASE_URL = "http://localhost:9991/";
 
   public static void main(String... args) {
 
@@ -33,7 +33,6 @@ public class TestClient {
 
     Retryer<ClientResponse> retryer =
       RetryerBuilder.<ClientResponse>newBuilder()
-      .retryIfException()
       .retryIfResult(not(Success))
       .withStopStrategy(neverStop())
       .withWaitStrategy(fixedWait(2, SECONDS))
