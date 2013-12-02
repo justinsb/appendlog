@@ -24,4 +24,4 @@ cd $PREFIX
 
 export PREFIX
 export CLASSPATH=$( echo $LIB_DIR/*.jar . | sed 's/ /:/g')
-exec $JAVA $JAVA_OPTIONS org.robotninjas.barged.BargeD $*
+exec $JAVA $JAVA_OPTIONS com.cloudata.appendlog.BargeD $*

@@ -1,8 +1,7 @@
-option java_package = "org.robotninjas.barged";
+option java_package = "com.cloudata.appendlog";
 
-option java_outer_classname = "KvProto";
+option java_outer_classname = "LogProto";
 
-message KvEntry {
-	required bytes key = 1;
+message LogEntry {
 	required bytes value = 2;
 }
