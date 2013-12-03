@@ -11,13 +11,31 @@ public final class LogProto {
   public interface LogEntryOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes value = 2;
+    // required uint64 log_id = 1;
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required uint64 log_id = 1;</code>
+     */
+    boolean hasLogId();
+    /**
+     * <code>required uint64 log_id = 1;</code>
+     */
+    long getLogId();
+
+    // required bytes value = 3;
+    /**
+     * <code>required bytes value = 3;</code>
+     *
+     * <pre>
+     *required uint64 offset = 2;
+     * </pre>
      */
     boolean hasValue();
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required bytes value = 3;</code>
+     *
+     * <pre>
+     *required uint64 offset = 2;
+     * </pre>
      */
     com.google.protobuf.ByteString getValue();
   }
@@ -72,8 +90,13 @@ public final class LogProto {
               }
               break;
             }
-            case 18: {
+            case 8: {
               bitField0_ |= 0x00000001;
+              logId_ = input.readUInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000002;
               value_ = input.readBytes();
               break;
             }
@@ -117,23 +140,48 @@ public final class LogProto {
     }
 
     private int bitField0_;
-    // required bytes value = 2;
-    public static final int VALUE_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString value_;
+    // required uint64 log_id = 1;
+    public static final int LOG_ID_FIELD_NUMBER = 1;
+    private long logId_;
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required uint64 log_id = 1;</code>
      */
-    public boolean hasValue() {
+    public boolean hasLogId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required uint64 log_id = 1;</code>
+     */
+    public long getLogId() {
+      return logId_;
+    }
+
+    // required bytes value = 3;
+    public static final int VALUE_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString value_;
+    /**
+     * <code>required bytes value = 3;</code>
+     *
+     * <pre>
+     *required uint64 offset = 2;
+     * </pre>
+     */
+    public boolean hasValue() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes value = 3;</code>
+     *
+     * <pre>
+     *required uint64 offset = 2;
+     * </pre>
      */
     public com.google.protobuf.ByteString getValue() {
       return value_;
     }
 
     private void initFields() {
+      logId_ = 0L;
       value_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -141,6 +189,10 @@ public final class LogProto {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasLogId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasValue()) {
         memoizedIsInitialized = 0;
         return false;
@@ -153,7 +205,10 @@ public final class LogProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(2, value_);
+        output.writeUInt64(1, logId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(3, value_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -166,7 +221,11 @@ public final class LogProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, value_);
+          .computeUInt64Size(1, logId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, value_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -284,8 +343,10 @@ public final class LogProto {
 
       public Builder clear() {
         super.clear();
-        value_ = com.google.protobuf.ByteString.EMPTY;
+        logId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
+        value_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -317,6 +378,10 @@ public final class LogProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
+        result.logId_ = logId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
         result.value_ = value_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -334,6 +399,9 @@ public final class LogProto {
 
       public Builder mergeFrom(com.cloudata.appendlog.LogProto.LogEntry other) {
         if (other == com.cloudata.appendlog.LogProto.LogEntry.getDefaultInstance()) return this;
+        if (other.hasLogId()) {
+          setLogId(other.getLogId());
+        }
         if (other.hasValue()) {
           setValue(other.getValue());
         }
@@ -342,6 +410,10 @@ public final class LogProto {
       }
 
       public final boolean isInitialized() {
+        if (!hasLogId()) {
+          
+          return false;
+        }
         if (!hasValue()) {
           
           return false;
@@ -368,37 +440,86 @@ public final class LogProto {
       }
       private int bitField0_;
 
-      // required bytes value = 2;
-      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      // required uint64 log_id = 1;
+      private long logId_ ;
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required uint64 log_id = 1;</code>
        */
-      public boolean hasValue() {
+      public boolean hasLogId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required uint64 log_id = 1;</code>
+       */
+      public long getLogId() {
+        return logId_;
+      }
+      /**
+       * <code>required uint64 log_id = 1;</code>
+       */
+      public Builder setLogId(long value) {
+        bitField0_ |= 0x00000001;
+        logId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 log_id = 1;</code>
+       */
+      public Builder clearLogId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        logId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required bytes value = 3;
+      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes value = 3;</code>
+       *
+       * <pre>
+       *required uint64 offset = 2;
+       * </pre>
+       */
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes value = 3;</code>
+       *
+       * <pre>
+       *required uint64 offset = 2;
+       * </pre>
        */
       public com.google.protobuf.ByteString getValue() {
         return value_;
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required bytes value = 3;</code>
+       *
+       * <pre>
+       *required uint64 offset = 2;
+       * </pre>
        */
       public Builder setValue(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         value_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required bytes value = 3;</code>
+       *
+       * <pre>
+       *required uint64 offset = 2;
+       * </pre>
        */
       public Builder clearValue() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         value_ = getDefaultInstance().getValue();
         onChanged();
         return this;
@@ -429,9 +550,9 @@ public final class LogProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\027src/main/proto/kv.proto\"\031\n\010LogEntry\022\r\n" +
-      "\005value\030\002 \002(\014B\"\n\026com.cloudata.appendlogB\010" +
-      "LogProto"
+      "\n\027src/main/proto/kv.proto\")\n\010LogEntry\022\016\n" +
+      "\006log_id\030\001 \002(\004\022\r\n\005value\030\003 \002(\014B\"\n\026com.clou" +
+      "data.appendlogB\010LogProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -443,7 +564,7 @@ public final class LogProto {
           internal_static_LogEntry_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LogEntry_descriptor,
-              new java.lang.String[] { "Value", });
+              new java.lang.String[] { "LogId", "Value", });
           return null;
         }
       };
